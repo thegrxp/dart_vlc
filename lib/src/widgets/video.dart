@@ -123,6 +123,9 @@ class Video extends StatefulWidget {
   // instead of the total time, set this to true
   final bool showTimeLeft;
 
+  // Widget which can be used instead of default progress
+  final String placeholderLink;
+
   Video({
     @Deprecated('playerId is deprecated. Use player instead.') int? playerId,
     Player? player,
@@ -145,6 +148,7 @@ class Video extends StatefulWidget {
     this.showTimeLeft = false,
     this.progressBarTextStyle = const TextStyle(),
     this.filterQuality = FilterQuality.low,
+    this.placeholderLink = "",
     Key? key,
   })  : player = player ?? players[playerId]! as Player,
         super(key: key);
@@ -169,7 +173,11 @@ abstract class _VideoStateBase extends State<Video>
     return Container(
       width: widget.width ?? double.infinity,
       height: widget.height ?? double.infinity,
-      color: Colors.black,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(widget.placeholderLink),
+        ),
+      ),
       child: widget.showControls
           ? Control(
               key: controlKey,

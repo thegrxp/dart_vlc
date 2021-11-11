@@ -132,7 +132,7 @@ class ControlState extends State<Control> with SingleTickerProviderStateMixin {
                       bottom: 0,
                       child: Padding(
                         padding:
-                            EdgeInsets.only(bottom: 60, right: 20, left: 20),
+                        EdgeInsets.only(bottom: 60, right: 20, left: 20),
                         child: StreamBuilder<PositionState>(
                           stream: player.positionStream,
                           builder: (BuildContext context,
@@ -152,11 +152,11 @@ class ControlState extends State<Control> with SingleTickerProviderStateMixin {
                                 thumbColor: widget.progressBarThumbColor,
                                 baseBarColor: widget.progressBarInactiveColor,
                                 thumbGlowColor:
-                                    widget.progressBarThumbGlowColor,
+                                widget.progressBarThumbGlowColor,
                                 thumbRadius:
-                                    widget.progressBarThumbRadius ?? 10.0,
+                                widget.progressBarThumbRadius ?? 10.0,
                                 thumbGlowRadius:
-                                    widget.progressBarThumbGlowRadius ?? 30.0,
+                                widget.progressBarThumbGlowRadius ?? 30.0,
                                 timeLabelLocation: TimeLabelLocation.sides,
                                 timeLabelType: widget.showTimeLeft!
                                     ? TimeLabelType.remainingTime
@@ -177,30 +177,8 @@ class ControlState extends State<Control> with SingleTickerProviderStateMixin {
                       bottom: 10,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          IconButton(
-                            color: Colors.white,
-                            iconSize: 30,
-                            icon: Icon(Icons.skip_previous),
-                            onPressed: () => player.back(),
-                          ),
-                          SizedBox(width: 50),
-                          IconButton(
-                              color: Colors.white,
-                              iconSize: 30,
-                              icon: Icon(Icons.replay_10),
-                              onPressed: () {
-                                int positionInMilliseconds =
-                                    player.position.position?.inMilliseconds ??
-                                        0;
-                                if (!(positionInMilliseconds - 10000)
-                                    .isNegative)
-                                  positionInMilliseconds -= 10000;
-                                player.seek(Duration(
-                                    milliseconds: positionInMilliseconds));
-                                setState(() {});
-                              }),
                           SizedBox(width: 20),
                           IconButton(
                             color: Colors.white,
@@ -219,32 +197,6 @@ class ControlState extends State<Control> with SingleTickerProviderStateMixin {
                             },
                           ),
                           SizedBox(width: 20),
-                          IconButton(
-                              color: Colors.white,
-                              iconSize: 30,
-                              icon: Icon(Icons.forward_10),
-                              onPressed: () {
-                                int durationInMilliseconds =
-                                    player.position.duration?.inMilliseconds ??
-                                        0;
-                                int positionInMilliseconds =
-                                    player.position.position?.inMilliseconds ??
-                                        1;
-                                if ((positionInMilliseconds + 10000) <=
-                                    durationInMilliseconds) {
-                                  positionInMilliseconds += 10000;
-                                  player.seek(Duration(
-                                      milliseconds: positionInMilliseconds));
-                                  setState(() {});
-                                }
-                              }),
-                          SizedBox(width: 50),
-                          IconButton(
-                            color: Colors.white,
-                            iconSize: 30,
-                            icon: Icon(Icons.skip_next),
-                            onPressed: () => player.next(),
-                          ),
                         ],
                       ),
                     ),
@@ -260,27 +212,6 @@ class ControlState extends State<Control> with SingleTickerProviderStateMixin {
                             inactiveColor: widget.volumeInactiveColor,
                             activeColor: widget.volumeActiveColor,
                             backgroundColor: widget.volumeBackgroundColor,
-                          ),
-                          PopupMenuButton(
-                            iconSize: 24,
-                            icon: Icon(Icons.speaker, color: Colors.white),
-                            onSelected: (Device device) {
-                              player.setDevice(device);
-                              setState(() {});
-                            },
-                            itemBuilder: (context) {
-                              return Devices.all
-                                  .map(
-                                    (device) => PopupMenuItem(
-                                      child: Text(device.name,
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                          )),
-                                      value: device,
-                                    ),
-                                  )
-                                  .toList();
-                            },
                           ),
                         ],
                       ),
