@@ -33,6 +33,7 @@ class DartVLCExampleState extends State<DartVLCExample> {
   void initState() {
     super.initState();
     if (this.mounted) {
+
       this.player.currentStream.listen((current) {
         this.setState(() => this.current = current);
       });
