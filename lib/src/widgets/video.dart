@@ -170,34 +170,61 @@ abstract class _VideoStateBase extends State<Video>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: widget.width ?? double.infinity,
-      height: widget.height ?? double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(widget.placeholderLink),
-        ),
-      ),
-      child: widget.showControls
-          ? Control(
-              key: controlKey,
-              player: widget.player,
-              progressBarThumbRadius: widget.progressBarThumbRadius,
-              progressBarThumbGlowRadius: widget.progressBarThumbGlowRadius,
-              progressBarActiveColor: widget.progressBarActiveColor,
-              progressBarInactiveColor: widget.progressBarInactiveColor,
-              progressBarThumbColor: widget.progressBarThumbColor,
-              progressBarThumbGlowColor: widget.progressBarThumbGlowColor,
-              volumeActiveColor: widget.volumeActiveColor,
-              volumeInactiveColor: widget.volumeInactiveColor,
-              volumeBackgroundColor: widget.volumeBackgroundColor,
-              volumeThumbColor: widget.volumeThumbColor,
-              showTimeLeft: widget.showTimeLeft,
-              progressBarTextStyle: widget.progressBarTextStyle,
-              child: present(),
-            )
-          : present(),
-    );
+    return widget.placeholderLink.isNotEmpty
+        ? Container(
+            width: widget.width ?? double.infinity,
+            height: widget.height ?? double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(widget.placeholderLink),
+              ),
+            ),
+            child: widget.showControls
+                ? Control(
+                    key: controlKey,
+                    player: widget.player,
+                    progressBarThumbRadius: widget.progressBarThumbRadius,
+                    progressBarThumbGlowRadius:
+                        widget.progressBarThumbGlowRadius,
+                    progressBarActiveColor: widget.progressBarActiveColor,
+                    progressBarInactiveColor: widget.progressBarInactiveColor,
+                    progressBarThumbColor: widget.progressBarThumbColor,
+                    progressBarThumbGlowColor: widget.progressBarThumbGlowColor,
+                    volumeActiveColor: widget.volumeActiveColor,
+                    volumeInactiveColor: widget.volumeInactiveColor,
+                    volumeBackgroundColor: widget.volumeBackgroundColor,
+                    volumeThumbColor: widget.volumeThumbColor,
+                    showTimeLeft: widget.showTimeLeft,
+                    progressBarTextStyle: widget.progressBarTextStyle,
+                    child: present(),
+                  )
+                : present(),
+          )
+        : Container(
+            width: widget.width ?? double.infinity,
+            height: widget.height ?? double.infinity,
+            color: Colors.black,
+            child: widget.showControls
+                ? Control(
+                    key: controlKey,
+                    player: widget.player,
+                    progressBarThumbRadius: widget.progressBarThumbRadius,
+                    progressBarThumbGlowRadius:
+                        widget.progressBarThumbGlowRadius,
+                    progressBarActiveColor: widget.progressBarActiveColor,
+                    progressBarInactiveColor: widget.progressBarInactiveColor,
+                    progressBarThumbColor: widget.progressBarThumbColor,
+                    progressBarThumbGlowColor: widget.progressBarThumbGlowColor,
+                    volumeActiveColor: widget.volumeActiveColor,
+                    volumeInactiveColor: widget.volumeInactiveColor,
+                    volumeBackgroundColor: widget.volumeBackgroundColor,
+                    volumeThumbColor: widget.volumeThumbColor,
+                    showTimeLeft: widget.showTimeLeft,
+                    progressBarTextStyle: widget.progressBarTextStyle,
+                    child: present(),
+                  )
+                : present(),
+          );
   }
 
   Widget present();
