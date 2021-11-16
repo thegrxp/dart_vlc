@@ -203,7 +203,7 @@ abstract class _VideoStateBase extends State<Video>
         : Container(
             width: widget.width ?? double.infinity,
             height: widget.height ?? double.infinity,
-            color: Colors.black,
+            color: Color(0xff1b1b23),
             child: widget.showControls
                 ? Control(
                     key: controlKey,
