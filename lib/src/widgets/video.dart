@@ -126,6 +126,9 @@ class Video extends StatefulWidget {
   // Widget which can be used instead of default progress
   final String placeholderLink;
 
+  // Scale placeholder
+  final double ratio;
+
   Video({
     @Deprecated('playerId is deprecated. Use player instead.') int? playerId,
     Player? player,
@@ -149,6 +152,7 @@ class Video extends StatefulWidget {
     this.progressBarTextStyle = const TextStyle(),
     this.filterQuality = FilterQuality.low,
     this.placeholderLink = "",
+    this.ratio = 0.0,
     Key? key,
   })  : player = player ?? players[playerId]! as Player,
         super(key: key);
@@ -176,7 +180,7 @@ abstract class _VideoStateBase extends State<Video>
             height: widget.height ?? double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(widget.placeholderLink),
+                image: NetworkImage(widget.placeholderLink, scale: widget.ratio),
               ),
             ),
             child: widget.showControls
